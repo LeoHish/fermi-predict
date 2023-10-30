@@ -20,7 +20,7 @@ def run():
     st.markdown(
         """
         ### 功能
-        通過匯入POSTCAR來預測費米能
+        通過匯入POSCAR來預測費米能
     """
     )
 
@@ -38,7 +38,7 @@ def run():
     with col1:
         st.subheader("上傳")
         temp_dir = tempfile.mkdtemp()
-        uploads_file = st.file_uploader("上傳POSTCAR")
+        uploads_file = st.file_uploader("上傳POSCAR")
         if uploads_file is not None:
             with open(os.path.join(temp_dir, uploads_file.name), "wb") as f:
                 f.write(uploads_file.read())
@@ -53,7 +53,7 @@ def run():
         predict_button = st.button("開始預測", type="secondary")
 
         if predict_button and uploads_file is None:
-            st.error("還未上傳 POSTCAR")
+            st.error("還未上傳 POSCAR")
 
     with col2:
         st.subheader(
@@ -66,7 +66,7 @@ def run():
                 predict_data = predictFermi(preprocess_data)
             except Exception as e:
                 st.error("預測失敗 ")
-                st.error("POSTCAR 格式有誤")
+                st.error("POSCAR 格式有誤")
 
         if predict_data is not None:
             st.dataframe(predict_data, width=300)
